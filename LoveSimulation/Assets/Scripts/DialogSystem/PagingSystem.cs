@@ -9,15 +9,16 @@ using UnityEngine.UI;
 public class PagingSystem : UIBase, IPointerDownHandler
 {
     List<string> textList = new List<string> {
-    "Hello Everyone! my name is jeonmuhyuk",
-    "Hello Everyone! my name is AAAAAAAAA",
-    "Hello Everyone! my name is BBBBBBBBB"
+        "Hello Everyone! my name is jeonmuhyuk",
+        "Hello Everyone! my name is AAAAAAAAA",
+        "Hello Everyone! my name is BBBBBBBBB"
     };
     int i = 0;
 
-
+    [Header("DEPENDENCE")]
     [SerializeField] private Dialog _dialog;
     [SerializeField] private CanvasGroup _canvasGroup;
+    [Header("INFORMATION")]
     [SerializeField] private bool killProcess = false;
     public void OnPointerDown(PointerEventData eventData)
     {

@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 
 public class Dialog : MonoBehaviour
 {
+    [Header("DEPENDENCE")]
     [SerializeField] private TextMeshProUGUI tmp;
     Tween tween;
 
