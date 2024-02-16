@@ -20,6 +20,7 @@ public class PagingSystem : UIBase, IPointerDownHandler
     [SerializeField] private CanvasGroup _canvasGroup;
     [Header("INFORMATION")]
     [SerializeField] private bool killProcess = false;
+
     public void OnPointerDown(PointerEventData eventData)
     {
         _dialog.Play(textList[i], 3.0f);
