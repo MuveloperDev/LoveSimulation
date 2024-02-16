@@ -11,5 +11,12 @@ namespace Enum
 		Static,
 		Popup
 	}
+
+    public enum ResourceScope
+    {
+        Global,
+        Ingame,
+        Outgame
+    }
 }
 

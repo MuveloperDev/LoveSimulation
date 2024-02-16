@@ -10,8 +10,8 @@ public class PagingSystem : UIBase, IPointerDownHandler
 {
     List<string> textList = new List<string> {
         "Hello Everyone! my name is jeonmuhyuk",
-        "Hello Everyone! my name is AAAAAAAAA",
-        "Hello Everyone! my name is BBBBBBBBB"
+        "Bye Everyone! my name is AAAAAAAAA",
+        "How are you Everyone! my name is BBBBBBBBB"
     };
     int i = 0;
 
