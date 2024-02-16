@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Enum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ using UnityEngine;
 #pragma warning disable CS1998 
 public class UIBase : MonoBehaviour
 {
+    [SerializeField] private UILayer _layer = UILayer.None;
+
     public bool isActive { get; private set; } = false;
 
     protected async virtual UniTask BeforeShow()
@@ -34,5 +37,7 @@ public class UIBase : MonoBehaviour
         isActive = false;
         AfterHide();
     }
+
+    public void SetLayer(UILayer argLayer) => _layer = argLayer;
 }
 #pragma warning restore CS1998
