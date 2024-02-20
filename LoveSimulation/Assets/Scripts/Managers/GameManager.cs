@@ -22,6 +22,10 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             SceneManager.LoadScene("TitleScene");
         }
     }
+    private void Dispose()
+    {
+        
+    }
     private void LoadedScene(Scene scene, LoadSceneMode mode)
     {
        switch (scene.name)
