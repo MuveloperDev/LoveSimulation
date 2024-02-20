@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: edf3f156dbe5e2c4596e4c8fa3d554ae
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: d7db25562fe5a0446bf1392a1c8988a8
+    m_Address: Assets/Resources/Prefabs/DialogBox.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7859288492ead9a4f82d12c24e610cf0, type: 2}
   m_SchemaSet:

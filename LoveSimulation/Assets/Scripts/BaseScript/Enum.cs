@@ -19,10 +19,10 @@ namespace Enum
         Outgame
     }
 
-	public enum Scene
+	public enum Scenes
 	{
-		Title = 0,
-		InGame
+		TitleScene = 0,
+		InGameScene
 	}
 }
 
