@@ -277,8 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cea2ae442577c489b06b4edbea6bbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layer: 0
   _dialog: {fileID: 959496895}
   _canvasGroup: {fileID: 198561803}
+  killProcess: 0
 --- !u!225 &198561803
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -385,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 625441679}
   - component: {fileID: 625441678}
+  - component: {fileID: 625441680}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -420,6 +423,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &625441680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625441677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37dfeb64c2a26240bd55ee70ec7b022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &759996172
 GameObject:
   m_ObjectHideFlags: 0

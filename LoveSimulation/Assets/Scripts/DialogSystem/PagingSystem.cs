@@ -54,4 +54,8 @@ public class PagingSystem : UIBase, IPointerDownHandler
         _dialog.ClearText();
         i = 0;
     }
+    public void Test()
+    {
+        Debug.Log("LOAD!!!!");
+    }
 }

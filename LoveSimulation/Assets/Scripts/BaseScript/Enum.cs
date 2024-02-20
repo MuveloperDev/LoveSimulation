@@ -7,8 +7,8 @@ namespace Enum
 	public enum UILayer
 	{
 		None = 0,
-		Frequent,
 		Static,
+		Frequent,
 		Popup
 	}
 
@@ -18,5 +18,11 @@ namespace Enum
         Ingame,
         Outgame
     }
+
+	public enum Scene
+	{
+		Title = 0,
+		InGame
+	}
 }
 

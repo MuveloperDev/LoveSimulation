@@ -49,14 +49,13 @@ public class JsonLoader
             items.Clear();
             foreach (var deserializedItem in deserializedItems)
             {
-                var idField = deserializedItem.GetType().GetField("ID");
+                var idField = deserializedItem.GetType().GetField("Id");
                 var idValue = (int)idField.GetValue(deserializedItem);
                 items.Add(idValue, deserializedItem);
             }
         }
     }
 
-    // 소스 코드에서 GetStaticProperty를 GetStaticField로 수정
     private object GetStaticField(string classQualifiedName, string fieldName)
     {
         System.Type type = Type.GetType(classQualifiedName);

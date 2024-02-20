@@ -8,10 +8,18 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using Enum;
 public class ResourcesManager : Singleton<ResourcesManager>
 {
-    public ResourcesManager() { }
+    public ResourcesManager() { Initilized(); }
     ~ResourcesManager() { Dispose(); }
 
     Dictionary<ResourceScope, List<object>> handles = new();
+
+    private void Initilized()
+    {
+        foreach (var scope in System.Enum.GetValues(typeof(ResourceScope)))
+        {
+            handles[(ResourceScope)scope] = new();
+        }
+    }
 
     private void Dispose()
     {
@@ -41,8 +49,9 @@ public class ResourcesManager : Singleton<ResourcesManager>
 
     public async UniTask<T> LoadAsset<T>(string path, ResourceScope scope = ResourceScope.Global) where T : class
     {
-        T asset = null;
-        Addressables.LoadAssetAsync<T>(path).Completed += handle =>
+        GameObject asset = null;
+        bool isProcessed = false;
+        Addressables.LoadAssetAsync<GameObject>(path).Completed += handle =>
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
@@ -55,16 +64,26 @@ public class ResourcesManager : Singleton<ResourcesManager>
                 // 애셋 로드 실패
                 Debug.LogError("Failed to load asset: ");
             }
+            isProcessed = true;
         };
 
-        await UniTask.WaitUntil(() => null != asset);
-        return asset;
+
+        await UniTask.WaitUntil(() => false != isProcessed);
+        if (null == asset)
+            return default;
+
+        T type = null;
+        if (true == asset.TryGetComponent<T>(out type))
+        {
+            return type;
+        }
+        return default;
     }
 
     public async UniTask<UnityEngine.GameObject> GameObjectInstantiate(string path, Transform parent, ResourceScope scope = ResourceScope.Global, Action<GameObject> onComplete = null)
     {
         GameObject assetInstance = null;
-        bool isProcessing = true;
+        bool isProcessed = false;
 
         if (true == string.IsNullOrEmpty(path))
             return null;
@@ -83,10 +102,10 @@ public class ResourcesManager : Singleton<ResourcesManager>
                 // 애셋 인스턴스 생성 실패
                 Debug.LogError("Failed to instantiate asset: " + handle.OperationException);
             }
-            isProcessing = false;
+            isProcessed = true;
         };
 
-        await UniTask.WaitUntil(() => true != isProcessing);
+        await UniTask.WaitUntil(() => false != isProcessed);
 
         if (onComplete != null)
         {
