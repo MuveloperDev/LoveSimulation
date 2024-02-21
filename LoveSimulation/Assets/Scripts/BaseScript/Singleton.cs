@@ -6,10 +6,11 @@ using UnityEngine;
 public class Singleton<T> where T : new()
 {
     private static readonly object lockObject = new object();
-    private static T instance = default(T);
+    protected static T instance = default(T);
+    public static bool isExistance { get { return null != instance; } }
 
     protected Singleton() { }
-
+    ~Singleton() { }
     public static T Instance
     {
         get
@@ -26,5 +27,11 @@ public class Singleton<T> where T : new()
             }
             return instance;
         }
+    }
+
+    protected virtual void Dispose()
+    {
+        instance = default(T);
+        Debug.Log($"{GetType()} isExistance : {isExistance}");
     }
 }

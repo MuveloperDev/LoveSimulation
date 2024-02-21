@@ -39,5 +39,6 @@ public class UIBase : MonoBehaviour
     }
 
     public void SetLayer(UILayer argLayer) => _layer = argLayer;
+    public UILayer GetLayer() => _layer;
 }
 #pragma warning restore CS1998

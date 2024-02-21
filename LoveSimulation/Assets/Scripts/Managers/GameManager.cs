@@ -7,25 +7,22 @@ using UnityEngine.SceneManagement;
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
     [SerializeField] private Scenes _currentScene;
-    public Scenes currentScene { get { return _currentScene; } set { } }
+    public Scenes currentScene { get { return _currentScene; }}
 
-
-    private void Awake()
+    protected override void Awake()
     {
-        DontDestroyOnLoad(this);
+        base.Awake();
         SceneManager.sceneLoaded += LoadedScene;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SceneManager.LoadScene("TitleScene");
+            UIManager_Out.Instance.Dispose();
+            SceneManager.LoadScene("InGameScene");
         }
     }
-    private void Dispose()
-    {
-        
-    }
+
     private void LoadedScene(Scene scene, LoadSceneMode mode)
     {
        switch (scene.name)
@@ -33,15 +30,26 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             case nameof(Scenes.TitleScene):
                 {
                     _currentScene = Scenes.TitleScene;
+                     UIManager_Out.Instance.Initialize();
+                    TitleSequence();
                 }
                 break;
             case nameof(Scenes.InGameScene):
                 {
                     _currentScene = Scenes.InGameScene;
-
+                    UIManager_In.Instance.Initialize();
+                    InGameSequence();
                 }
                 break;
        }
     }
 
+    private void TitleSequence()
+    { 
+        
+    }
+    private void InGameSequence()
+    { 
+        
+    }
 }
