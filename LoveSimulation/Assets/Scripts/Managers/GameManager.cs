@@ -13,14 +13,21 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     {
         base.Awake();
         SceneManager.sceneLoaded += LoadedScene;
+        SceneLoader.Instance.onCompleteLoad += LoadComplete;
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             UIManager_Out.Instance.Dispose();
-            SceneManager.LoadScene("InGameScene");
+            Debug.Log("인게임씬 로드 시작");
+            SceneLoader.Instance.LoadSceneAsync("InGameScene");
         }
+    }
+
+    private void LoadComplete()
+    {
+        Debug.Log("인 게임씬 로드 전");
     }
 
     private void LoadedScene(Scene scene, LoadSceneMode mode)
@@ -36,6 +43,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 break;
             case nameof(Scenes.InGameScene):
                 {
+                    Debug.Log("인게임씬 로드 완");
                     _currentScene = Scenes.InGameScene;
                     UIManager_In.Instance.Initialize();
                     InGameSequence();

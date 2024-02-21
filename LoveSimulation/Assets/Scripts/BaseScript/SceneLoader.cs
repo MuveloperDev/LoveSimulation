@@ -10,6 +10,7 @@ public class SceneLoader : Singleton<SceneLoader>
 {
     public Action<float> onProgress;
     public Action onCompleteLoad;
+    public Action onLoadBefore;
 
     public void LoadSceneAsync(string sceneName)
     {
@@ -19,8 +20,10 @@ public class SceneLoader : Singleton<SceneLoader>
     private async UniTask LoadAsyncScene(string sceneName)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
 
-        while (!asyncLoad.isDone)
+        onLoadBefore?.Invoke();
+        while (asyncLoad.progress < 0.9f)
         {
             Debug.Log("Loading progress: " + (asyncLoad.progress * 100) + "%");
             onProgress?.Invoke(asyncLoad.progress);
@@ -28,6 +31,12 @@ public class SceneLoader : Singleton<SceneLoader>
         }
 
         onCompleteLoad?.Invoke();
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        asyncLoad.allowSceneActivation = true;
+        while (false == asyncLoad.isDone)
+        {
+            onProgress?.Invoke(asyncLoad.progress);
+            await UniTask.Yield();
+        }
+        //SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
