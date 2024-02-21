@@ -1,18 +1,23 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UIManager_Out : UIManagerTemplate<UIManager_Out>
 {
-    public override void Initialize()
+    public override async void Initialize()
     {
         canvasName = "out_";
         base.Initialize();
+
+        await CreateUIs();
     }
-    protected override void AfterInitialize()
+
+    private async UniTask CreateUIs()
     {
-        base.AfterInitialize();
-        canvasName = "out_";
+        var pagingSys = await CreateUI<PagingSystem>("Assets/Resources/Prefabs/DialogBox.prefab", Enum.UILayer.Frequent, Enum.ResourceScope.Outgame);
+        
     }
+
 
 }

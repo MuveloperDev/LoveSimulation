@@ -6,6 +6,8 @@ using UnityEditor.AddressableAssets.Build;
 using UnityEditor.AddressableAssets;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
+using UnityEditor.SceneManagement;
 
 public class BuildCustomWindow : EditorWindow
 {
@@ -25,6 +27,8 @@ public class BuildCustomWindow : EditorWindow
     private static GUIStyle buttonStyle = null;
     // ÇöÀç Å¸°Ù ÇÃ·§ÆûÀ» ÀúÀåÇÒ º¯¼öÀÔ´Ï´Ù.
     private BuildTarget currentTarget;
+    private Vector2 scrollPosition;
+
     [MenuItem("Custom/Build Window")]
     public static void ShowWindow()
     {
@@ -66,14 +70,21 @@ public class BuildCustomWindow : EditorWindow
     {
         // ÇöÀç Å¸°Ù ÇÃ·§ÆûÀ» °¡Á®¿É´Ï´Ù.
         currentTarget = EditorUserBuildSettings.activeBuildTarget;
+        
     }
     private void OnGUI()
     {
-        GUILayout.Space(20);
+        GUILayout.Space(10);
         GUILayout.Label("", GUI.skin.horizontalSlider);
         GUILayout.Space(10);
 
         CreateBuildSetting();
+
+        GUILayout.Space(10);
+        GUILayout.Label("", GUI.skin.horizontalSlider);
+        GUILayout.Space(10);
+
+        CreatePlatformSetting();
 
         GUILayout.Space(10);
         GUILayout.Label("", GUI.skin.horizontalSlider);
@@ -85,10 +96,45 @@ public class BuildCustomWindow : EditorWindow
         GUILayout.Space(10);
         GUILayout.Label("", GUI.skin.horizontalSlider);
     }
-
     private void CreateBuildSetting()
     {
         GUILayout.Label("Build Setting", FontStyle(), GUILayout.ExpandWidth(true));
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Height(100));
+        foreach (var scene in EditorBuildSettings.scenes)
+        {
+            GUILayout.BeginHorizontal();
+            scene.enabled = EditorGUILayout.Toggle(scene.enabled, GUILayout.Width(20));
+            EditorGUILayout.LabelField(scene.path, EditorStyles.label);
+            if (GUILayout.Button("Remove", GUILayout.Width(60)))
+            {
+                RemoveScene(scene.path);
+            }
+            GUILayout.EndHorizontal();
+        }
+
+        GUILayout.EndScrollView();
+        GUILayout.Space(10);
+
+        if (GUILayout.Button("Add Open Scenes"))
+        {
+            AddOpenScenes();
+        }
+
+        GUILayout.Space(10);
+
+        if (GUILayout.Button("Add Scene by Path"))
+        {
+            string path = EditorUtility.OpenFilePanel("Add Scene", "Assets", "unity");
+            if (!string.IsNullOrEmpty(path))
+            {
+                path = path.Replace(Application.dataPath, "Assets");
+                AddScene(path);
+            }
+        }
+    }
+    private void CreatePlatformSetting()
+    {
+        GUILayout.Label("Platform Setting", FontStyle(), GUILayout.ExpandWidth(true));
         GUILayout.Space(10);
         // Å¸°Ù ÇÃ·§ÆûÀ» ¼±ÅÃÇÒ ¼ö ÀÖ´Â µå·Ó´Ù¿î ¸Þ´º¸¦ ¸¸µì´Ï´Ù.
         currentTarget = (BuildTarget)EditorGUILayout.EnumPopup("Target Platform", currentTarget);
@@ -101,6 +147,33 @@ public class BuildCustomWindow : EditorWindow
         }
     }
 
+    private void AddOpenScenes()
+    {
+        foreach (var scene in EditorSceneManager.GetSceneManagerSetup())
+        {
+            AddScene(scene.path);
+        }
+    }
+
+    private void AddScene(string path)
+    {
+        var scenes = EditorBuildSettings.scenes.ToList();
+        if (!scenes.Any(s => s.path == path))
+        {
+            scenes.Add(new EditorBuildSettingsScene(path, true));
+            EditorBuildSettings.scenes = scenes.ToArray();
+        }
+    }
+    private void RemoveScene(string path)
+    {
+        var scenes = EditorBuildSettings.scenes.ToList();
+        var scene = scenes.FirstOrDefault(s => s.path == path);
+        if (scene != null)
+        {
+            scenes.Remove(scene);
+            EditorBuildSettings.scenes = scenes.ToArray();
+        }
+    }
     private void CreateAddressable()
     {
         GUILayout.Label("Addressable", FontStyle(), GUILayout.ExpandWidth(true));

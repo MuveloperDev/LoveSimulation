@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class UIManagerTemplate<T> : Singleton<T> where T : new()
 {
-    public bool isExistance { get; private set; }
     public bool isInitialized { get; private set; } = false;
 
     private Dictionary<ResourceScope, Dictionary<System.Type, GameObject>> _resourcesUI = new();
@@ -17,13 +16,16 @@ public class UIManagerTemplate<T> : Singleton<T> where T : new()
     protected string canvasName = string.Empty;
     public virtual void Initialize()
     {
+        foreach (var scope in System.Enum.GetValues(typeof(ResourceScope)))
+        {
+            if ((ResourceScope)scope is ResourceScope.None or ResourceScope.Max)
+                continue;
+
+            _resourcesUI[(ResourceScope)scope] = new();
+        }
         CreateCanvas();
-        AfterInitialize();
+
         isInitialized = true;
-    }
-    protected virtual void AfterInitialize()
-    {
-        Debug.Log("AAA");
     }
 
     public void Dispose()
@@ -56,9 +58,9 @@ public class UIManagerTemplate<T> : Singleton<T> where T : new()
         }
     }
 
-    public async Task<T> CreateUI<T>(string path, UILayer layer, ResourceScope scope = ResourceScope.Global) where T : Component
+    public async Task<T1> CreateUI<T1>(string path, UILayer layer, ResourceScope scope = ResourceScope.Global) where T1 : Component
     {
-        var asset = await ResourcesManager.Instance.Instantiate<T>(path);
+        var asset = await ResourcesManager.Instance.Instantiate<T1>(path);
         if (asset == null)
             return null;
 
@@ -71,21 +73,21 @@ public class UIManagerTemplate<T> : Singleton<T> where T : new()
             go.transform.SetAsLastSibling();
         }
 
-        _resourcesUI[scope][typeof(T)] = go;
+        _resourcesUI[scope][typeof(T1)] = go;
         return asset;
     }
 
-    public T GetUI<T>() where T : class
+    public T1 GetUI<T1>() where T1 : class
     {
         foreach (var dictionary in _resourcesUI.Values)
         {
             if (false == dictionary.ContainsKey(typeof(T)))
                 continue;
 
-            return dictionary[typeof(T)] as T;
+            return dictionary[typeof(T1)] as T1;
         }
 
         Debug.LogError("Invaild type. does not exist in _UIsDictionary.");
-        return default(T);
+        return default(T1);
     }
 }

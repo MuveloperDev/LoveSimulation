@@ -9,11 +9,5 @@ public class UIManager_In : UIManagerTemplate<UIManager_In>
         canvasName = "in_";
         base.Initialize();
     }
-    protected override void AfterInitialize()
-    {
-        base.AfterInitialize();
-        canvasName = "in_";
-    }
-
 }
 
