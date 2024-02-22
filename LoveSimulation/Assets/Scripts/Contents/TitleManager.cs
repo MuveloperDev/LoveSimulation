@@ -12,11 +12,11 @@ public class TitleManager : UIBase
     [SerializeField] private Button _quitBtn;
 
     [Header("[ INFORMATION ]")]
-    [SerializeField] private int _titleStringId;
-    [SerializeField] private int _newGameStringId;
-    [SerializeField] private int _loadStringId;
-    [SerializeField] private int _optionStringId;
-    [SerializeField] private int _quitStringId;
+    [SerializeField] private int _titleStringId = 1;
+    [SerializeField] private int _newGameStringId = 2;
+    [SerializeField] private int _loadStringId = 3;
+    [SerializeField] private int _optionStringId = 4;
+    [SerializeField] private int _quitStringId = 5;
 
 
     void Start()

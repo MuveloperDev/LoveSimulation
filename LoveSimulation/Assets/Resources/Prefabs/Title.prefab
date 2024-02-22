@@ -338,7 +338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 3647458094963830253}
-  currentId: -1
+  _currentId: 3
+  _isUpdateInit: 1
 --- !u!1 &1842658826633816542
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +436,11 @@ MonoBehaviour:
   _loadBtn: {fileID: 4277569398148912567}
   _optionBtn: {fileID: 4438564733841906590}
   _quitBtn: {fileID: 1836464023611089389}
+  _titleStringId: 1
+  _newGameStringId: 2
+  _loadStringId: 3
+  _optionStringId: 4
+  _quitStringId: 5
 --- !u!1 &3409139099632697296
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +452,7 @@ GameObject:
   - component: {fileID: 5746815191646100986}
   - component: {fileID: 6192657110804866884}
   - component: {fileID: 4653520921176058106}
+  - component: {fileID: 5997140818115256095}
   m_Layer: 0
   m_Name: TitleText
   m_TagString: Untagged
@@ -570,6 +577,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5997140818115256095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409139099632697296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07a48dfb636f494f9871772a75266a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmp: {fileID: 0}
+  _currentId: 1
+  _isUpdateInit: 1
 --- !u!1 &5014719445097647776
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +863,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 5726563950007480241}
-  currentId: -1
+  _currentId: 4
+  _isUpdateInit: 1
 --- !u!1 &6039154672851675455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,7 +1136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 2184861225501464540}
-  currentId: -1
+  _currentId: 5
+  _isUpdateInit: 1
 --- !u!1 &6299812439450533708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,4 +1409,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmp: {fileID: 1511565834720789457}
-  currentId: -1
+  _currentId: 2
+  _isUpdateInit: 1

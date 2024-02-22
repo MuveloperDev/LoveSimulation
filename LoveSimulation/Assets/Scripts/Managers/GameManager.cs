@@ -10,12 +10,15 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     [SerializeField] private Scenes _currentScene;
     public Scenes currentScene { get { return _currentScene; }}
 
+    [SerializeField] private JsonLoader _jsonLoader = null;
     protected override void Awake()
     {
         base.Awake();
+        _jsonLoader = new JsonLoader();
+        _jsonLoader.Load();
         SceneManager.sceneLoaded += LoadedScene;
         SceneLoader.Instance.onCompleteLoad += LoadComplete;
-
+        StringLocalizerManager.Instance.CreateObject();
         UIManager_Out.Instance.CreateObject();
     }
     private void Update()

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,8 @@ public class StringLocalizer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tmp;
     [Header("[ INFORMATION ]")]
     [SerializeField] private int _currentId = -1;
+    [SerializeField] private bool _isUpdateInit = false;
+
     private void Awake()
     {
         tmp = GetComponent<TextMeshProUGUI>();
@@ -17,12 +20,18 @@ public class StringLocalizer : MonoBehaviour
             Debug.LogError($"{GetType()} tmp is null.");
             return;
         }
-
-        StringLocalizerManager.Instance.onChangeLanguage += UpdateLanguage;
     }
-    void Start()
+    async void Start()
     {
-        
+        if (null == StringLocalizerManager.Instance.fontAsset)
+            await UniTask.WaitUntil(() => null != StringLocalizerManager.Instance.fontAsset);
+
+        tmp.font = StringLocalizerManager.Instance.fontAsset;
+        StringLocalizerManager.Instance.onChangeLanguage += UpdateLanguage;
+        if (true == _isUpdateInit)
+        {
+            UpdateString(_currentId);
+        }
     }
 
     public void UpdateString(int id)
@@ -31,11 +40,13 @@ public class StringLocalizer : MonoBehaviour
         switch (StringLocalizerManager.Instance.currentLanguage)
         {
             case ELanguage.En:
-                { 
+                {
+                    tmp.text = StringData.table[id].En.Replace("\\n", "\n");
                 }
                 break;
             case ELanguage.Kr:
                 {
+                    tmp.text = StringData.table[id].Kr.Replace("\\n", "\n"); ;
                 }
                 break;
             default:
@@ -50,10 +61,12 @@ public class StringLocalizer : MonoBehaviour
         {
             case ELanguage.En:
                 {
+                    UpdateString(_currentId);
                 }
                 break;
             case ELanguage.Kr:
                 {
+                    UpdateString(_currentId);
                 }
                 break;
             default:
