@@ -10,7 +10,15 @@ public class TitleManager : UIBase
     [SerializeField] private Button _loadBtn;
     [SerializeField] private Button _optionBtn;
     [SerializeField] private Button _quitBtn;
-    // Start is called before the first frame update
+
+    [Header("[ INFORMATION ]")]
+    [SerializeField] private int _titleStringId;
+    [SerializeField] private int _newGameStringId;
+    [SerializeField] private int _loadStringId;
+    [SerializeField] private int _optionStringId;
+    [SerializeField] private int _quitStringId;
+
+
     void Start()
     {
         _newGameBtn.onClick.AddListener(() => { NewGameOnClickEvent(); });

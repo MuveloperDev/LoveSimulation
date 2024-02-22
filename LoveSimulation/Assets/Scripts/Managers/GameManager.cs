@@ -23,7 +23,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         if (Input.GetKeyDown(KeyCode.Q))
         {
             UIManager_Out.Instance.Dispose();
-            Debug.Log("인게임씬 로드 시작");
             SceneLoader.Instance.LoadSceneAsync("InGameScene");
         }
     }
@@ -40,7 +39,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             case nameof(Scenes.TitleScene):
                 {
                     _currentScene = Scenes.TitleScene;
-                     //UIManager_Out.Instance.Initialize();
                     TitleSequence();
                 }
                 break;
@@ -48,7 +46,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 {
                     Debug.Log("인게임씬 로드 완");
                     _currentScene = Scenes.InGameScene;
-                    //UIManager_In.Instance.Initialize();
                     InGameSequence();
                 }
                 break;

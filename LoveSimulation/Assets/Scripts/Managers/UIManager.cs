@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    public bool isExistance { get; private set; }
     public UIManager() {}
     ~UIManager() { Dispose(); }
 
@@ -27,10 +26,9 @@ public class UIManager : Singleton<UIManager>
     }
     protected virtual void AfterInitialize()
     {
-        Debug.Log("AAA");
     }
 
-    public void Dispose()
+    protected override void Dispose()
     {
         base.Dispose();
     }

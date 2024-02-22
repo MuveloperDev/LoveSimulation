@@ -8,7 +8,7 @@ public class StringLocalizer : MonoBehaviour
     [Header("[ DEPENDENCE ]")]
     [SerializeField] private TextMeshProUGUI tmp;
     [Header("[ INFORMATION ]")]
-    [SerializeField] private int currentId = -1;
+    [SerializeField] private int _currentId = -1;
     private void Awake()
     {
         tmp = GetComponent<TextMeshProUGUI>();
@@ -27,7 +27,7 @@ public class StringLocalizer : MonoBehaviour
 
     public void UpdateString(int id)
     {
-        currentId = id;
+        _currentId = id;
         switch (StringLocalizerManager.Instance.currentLanguage)
         {
             case ELanguage.En:
