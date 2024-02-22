@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class UIManager_In : UIManagerTemplate<UIManager_In>
 {
-    public override void Initialize()
+    public void Initialize()
+    {
+
+    }
+    protected override void InitializeTemplate()
     {
         canvasName = "in_";
-        base.Initialize();
+        base.InitializeTemplate();
     }
 }
 

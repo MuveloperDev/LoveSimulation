@@ -47,7 +47,7 @@ public class ResourcesManager : Singleton<ResourcesManager>
         }
     }
 
-    public async UniTask<T> LoadAsset<T>(string path, ResourceScope scope = ResourceScope.Global) where T : class
+    public async UniTask<T> LoadAssetAsyncGo<T>(string path, ResourceScope scope = ResourceScope.Global) where T : class
     {
         GameObject asset = null;
         bool isProcessed = false;
@@ -79,7 +79,33 @@ public class ResourcesManager : Singleton<ResourcesManager>
         }
         return default;
     }
+    public async UniTask<T> LoadAssetAsyncGeneric<T>(string path) where T : class
+    {
+        T type = null;
+        bool isProcessed = false;
+        Addressables.LoadAssetAsync<T>(path).Completed += handle =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                // 애셋 로드 성공
+                type = handle.Result;
+            }
+            else
+            {
+                // 애셋 로드 실패
+                Debug.LogError("Failed to load asset: ");
+            }
+            isProcessed = true;
+        };
 
+
+        await UniTask.WaitUntil(() => false != isProcessed);
+        if (null == type)
+            return default;
+
+
+        return type;
+    }
     public async UniTask<UnityEngine.GameObject> GameObjectInstantiate(string path, Transform parent, ResourceScope scope = ResourceScope.Global, Action<GameObject> onComplete = null)
     {
         GameObject assetInstance = null;

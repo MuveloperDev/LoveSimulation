@@ -9,7 +9,7 @@ public class Singleton<T> where T : new()
     protected static T instance = default(T);
     public static bool isExistance { get { return null != instance; } }
 
-    protected Singleton() { }
+    protected Singleton() { InitializeTemplate(); }
     ~Singleton() { }
     public static T Instance
     {
@@ -29,6 +29,10 @@ public class Singleton<T> where T : new()
         }
     }
 
+    public void CreateObject()
+    { }
+    protected virtual void InitializeTemplate()
+    {}
     protected virtual void Dispose()
     {
         instance = default(T);

@@ -19,7 +19,7 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<UILayer, RectTransform> _canvases = new();
 
     protected string canvasName = string.Empty;
-    public virtual void Initialize()
+    protected override void InitializeTemplate()
     {
         CreateCanvas();
         AfterInitialize();

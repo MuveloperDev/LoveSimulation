@@ -14,7 +14,7 @@ public class UIManagerTemplate<T> : Singleton<T> where T : new()
     private Dictionary<UILayer, RectTransform> _canvases = new();
 
     protected string canvasName = string.Empty;
-    public virtual void Initialize()
+    protected override void InitializeTemplate()
     {
         foreach (var scope in System.Enum.GetValues(typeof(ResourceScope)))
         {
@@ -71,6 +71,12 @@ public class UIManagerTemplate<T> : Singleton<T> where T : new()
             UILayer uiLayer = outUIBase.GetLayer();
             go.transform.SetParent(_canvases[uiLayer]);
             go.transform.SetAsLastSibling();
+            //go.transform.localPosition = Vector3.zero;
+            //go.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            RectTransform rectTransform = go.GetComponent<RectTransform>();
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.offsetMin = rectTransform.offsetMax = Vector2.zero;
         }
 
         _resourcesUI[scope][typeof(T1)] = go;

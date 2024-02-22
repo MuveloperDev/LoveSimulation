@@ -43,7 +43,7 @@ public class BuildCustomWindow : EditorWindow
         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
 
         // Resources 폴더에 있는 모든 프리팹을 찾습니다.
-        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/Resources" });
+        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab t:TMP_FontAsset", new[] { "Assets/Resources" });
 
         foreach (string guid in prefabGUIDs)
         {

@@ -21,6 +21,26 @@ MonoBehaviour:
     m_Address: Assets/Resources/Prefabs/DialogBox.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: dfd1d4557d6eb9c4cbe0d4f4439cf307
+    m_Address: Assets/Resources/Fonts/En/Rubik/Rubik-Regular SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1f7634b4b193f434ea07118525ee2291
+    m_Address: Assets/Resources/Fonts/En/Rubik/Rubik-SemiBold SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ef04bd523f133fe4ba07abb94d7d05af
+    m_Address: Assets/Resources/Fonts/Kr/Godo/GodoM_SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7ac1aabab628d10429546546f6a42b54
+    m_Address: Assets/Resources/Fonts/Kr/Godo/GodoB_SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fdd96b756e2cf6c43ad3876e02437a46
+    m_Address: Assets/Resources/Prefabs/Title.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7859288492ead9a4f82d12c24e610cf0, type: 2}
   m_SchemaSet:

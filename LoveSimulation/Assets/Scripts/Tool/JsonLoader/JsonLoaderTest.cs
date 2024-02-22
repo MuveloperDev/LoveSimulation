@@ -15,7 +15,7 @@ public class JsonLoaderTest : MonoBehaviour
             Debug.Log($"data : {data.Id} / {data.Name} / {data.Description}");
         }
 
-        var a = await ResourcesManager.Instance.LoadAsset<PagingSystem>("Assets/Resources/Prefabs/DialogBox.prefab");
+        var a = await ResourcesManager.Instance.LoadAssetAsyncGo<PagingSystem>("Assets/Resources/Prefabs/DialogBox.prefab");
         if (a != null)
         {
             Debug.Log("AAA");

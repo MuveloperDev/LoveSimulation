@@ -32,7 +32,7 @@ public class UIBase : MonoBehaviour
     {
         if (false == gameObject.activeSelf)
             return;
-        await BeforeHide();
+        //await BeforeHide();
         gameObject.SetActive(false);
         isActive = false;
         AfterHide();

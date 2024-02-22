@@ -1,4 +1,5 @@
 using Enum;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
         base.Awake();
         SceneManager.sceneLoaded += LoadedScene;
         SceneLoader.Instance.onCompleteLoad += LoadComplete;
+
+        UIManager_Out.Instance.CreateObject();
     }
     private void Update()
     {
@@ -37,7 +40,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
             case nameof(Scenes.TitleScene):
                 {
                     _currentScene = Scenes.TitleScene;
-                     UIManager_Out.Instance.Initialize();
+                     //UIManager_Out.Instance.Initialize();
                     TitleSequence();
                 }
                 break;
@@ -45,7 +48,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 {
                     Debug.Log("인게임씬 로드 완");
                     _currentScene = Scenes.InGameScene;
-                    UIManager_In.Instance.Initialize();
+                    //UIManager_In.Instance.Initialize();
                     InGameSequence();
                 }
                 break;
