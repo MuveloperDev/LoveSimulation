@@ -13,8 +13,8 @@ public class ResourcesManager : Singleton<ResourcesManager>
     public ResourcesManager() { }
     ~ResourcesManager() {  }
 
-    Dictionary<ResourceScope, List<object>> handles = new();
-    Dictionary<string, object> loadedHandles = new();
+    private Dictionary<ResourceScope, List<object>> handles = new();
+    private Dictionary<string, object> loadedHandles = new();
 
     protected override void InitializeTemplate()
     {
