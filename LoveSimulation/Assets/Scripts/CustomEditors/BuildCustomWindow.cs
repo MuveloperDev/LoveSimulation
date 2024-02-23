@@ -37,13 +37,30 @@ public class BuildCustomWindow : EditorWindow
 
 
     }
+    public enum EResourceType
+    {
+        Min = 0,
+        Prefab,
+        TMP_FontAsset,
+        SpriteAtlas,
+        Max
+    }
     public static void AssignPrefabsToAddressables()
     {
         // AddressableAssetSettings를 로드합니다.
         AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
+        string typeStr = string.Empty;
+        foreach (var type in System.Enum.GetValues(typeof(EResourceType)))
+        {
+            if ((EResourceType)type is EResourceType.Min or EResourceType.Max)
+                continue;
 
+            if ((int)type == (int)EResourceType.Max - 1)
+                typeStr += $"t:{type}";
+            else typeStr += $"t:{type} ";
+        }
         // Resources 폴더에 있는 모든 프리팹을 찾습니다.
-        string[] prefabGUIDs = AssetDatabase.FindAssets("t:Prefab t:TMP_FontAsset", new[] { "Assets/Resources" });
+        string[] prefabGUIDs = AssetDatabase.FindAssets(typeStr, new[] { "Assets/Resources" });
 
         foreach (string guid in prefabGUIDs)
         {

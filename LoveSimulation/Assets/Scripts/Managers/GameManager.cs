@@ -14,10 +14,16 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
     protected override void Awake()
     {
         base.Awake();
-        _jsonLoader = new JsonLoader();
-        _jsonLoader.Load();
+        CreateObjects();
         SceneManager.sceneLoaded += LoadedScene;
         SceneLoader.Instance.onCompleteLoad += LoadComplete;
+    }
+
+    private void CreateObjects()
+    {
+        _jsonLoader = new JsonLoader();
+        _jsonLoader.Load();
+        ResourcesManager.Instance.CreateObject();
         StringLocalizerManager.Instance.CreateObject();
         UIManager_Out.Instance.CreateObject();
     }
