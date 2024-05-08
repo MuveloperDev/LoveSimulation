@@ -29,5 +29,27 @@ namespace Enum
 		InGameScene,
         Max
     }
+
+    public enum MIBTIType
+    { 
+        None,
+        ISTJ = 1,
+        ISFJ,
+        INFJ,
+        INTJ,
+        ISTP,
+        ISFP,
+        INFP,
+        INTP,
+        ESTP,
+        ESFP,
+        ENFP,
+        ENTP,
+        ESTJ,
+        ESFJ,
+        ENFJ,
+        ENTJ,
+        Max
+    }
 }
 

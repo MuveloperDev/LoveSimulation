@@ -41,6 +41,10 @@ MonoBehaviour:
     m_Address: Assets/Resources/Prefabs/Title.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 57602cb50707781488a72066312d6764
+    m_Address: Assets/Resources/Atlas/New Sprite Atlas.spriteatlas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 7859288492ead9a4f82d12c24e610cf0, type: 2}
   m_SchemaSet:
